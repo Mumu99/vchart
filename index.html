@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>每日天气推送</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      .weather {
+        margin-top: 20px;
+        font-size: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>每日天气推送</h1>
+    <div
+      class="weather"
+      id="weather"
+    >
+      正在加载天气信息...
+    </div>
+
+    <script>
+      // 调用后端 API 获取天气数据
+      fetch("https://your-backend-api.com/weather")
+        .then((response) => response.json())
+        .then((data) => {
+          const weatherDiv = document.getElementById("weather");
+          weatherDiv.innerHTML = `
+                    <p>城市：${data.city}</p>
+                    <p>天气：${data.weather}</p>
+                    <p>温度：${data.temp}°C</p>
+                    <p>更新时间：${data.time}</p>
+                `;
+        })
+        .catch((error) => {
+          console.error("获取天气信息失败：", error);
+        });
+    </script>
+  </body>
+</html>
